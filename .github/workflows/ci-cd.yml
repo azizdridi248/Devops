@@ -42,6 +42,8 @@ jobs:
 
       # Stage 3: Run Tests
       - name: Run tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}/services/${{ matrix.service }}
         run: |
           cd services/${{ matrix.service }}
           pytest tests/ -v --tb=short
