@@ -42,11 +42,9 @@ jobs:
 
       # Stage 3: Run Tests
       - name: Run tests
-        env:
-          PYTHONPATH: ${{ github.workspace }}/services/${{ matrix.service }}
         run: |
           cd services/${{ matrix.service }}
-          pytest tests/ -v --tb=short
+          PYTHONPATH=. pytest tests/ -v --tb=short
 
   # ============================================
   # Stage 4: SAST Security Scan (Bandit)
