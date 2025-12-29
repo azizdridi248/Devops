@@ -1,5 +1,6 @@
 """Worker Service Unit Tests"""
 import pytest
+import pytest_asyncio
 from httpx import AsyncClient, ASGITransport
 from src.main import app, tasks_db
 
@@ -12,7 +13,7 @@ def clear_db():
     tasks_db.clear()
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def client():
     """Async test client"""
     transport = ASGITransport(app=app)
