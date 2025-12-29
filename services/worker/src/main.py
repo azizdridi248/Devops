@@ -125,7 +125,7 @@ async def create_task(task: TaskCreate):
         }
         tasks_db[task_id] = new_task
         ACTIVE_TASKS.inc()
-        logger.info("Task created", extra={"task_id": task_id, "name": task.name})
+        logger.info("Task created", extra={"task_id": task_id, "task_name": task.name})
         return new_task
 
 
