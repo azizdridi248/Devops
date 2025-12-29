@@ -1,0 +1,4 @@
+# OWASP ZAP Rule Configuration
+# Format: rule_id	action	(IGNORE, WARN, FAIL)
+10021	IGNORE	# X-Content-Type-Options Header Missing (low risk for API)
+10038	IGNORE	# Content Security Policy (not applicable for API)
