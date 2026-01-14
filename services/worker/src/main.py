@@ -41,8 +41,12 @@ trace.set_tracer_provider(TracerProvider(resource=resource))
 tracer_provider = trace.get_tracer_provider()
 
 # Export to Tempo (OTLP)
-otlp_exporter = OTLPSpanExporter(endpoint="http://tempo.monitoring.svc.cluster.local:4317", insecure=True)
-tracer_provider.add_span_processor(BatchSpanProcessor(otlp_exporter))
+import os
+if os.getenv("OTEL_TRACES_EXPORTER") == "console":
+    tracer_provider.add_span_processor(BatchSpanProcessor(ConsoleSpanExporter()))
+else:
+    otlp_exporter = OTLPSpanExporter(endpoint="http://tempo.monitoring.svc.cluster.local:4317", insecure=True)
+    tracer_provider.add_span_processor(BatchSpanProcessor(otlp_exporter))
 
 tracer = trace.get_tracer(__name__)
 
